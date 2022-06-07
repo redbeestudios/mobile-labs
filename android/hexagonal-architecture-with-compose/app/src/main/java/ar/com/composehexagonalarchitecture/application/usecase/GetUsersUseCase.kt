@@ -1,11 +1,12 @@
 package ar.com.composehexagonalarchitecture.application.usecase
 
 import android.util.Log
+import ar.com.composehexagonalarchitecture.application.port.out.TeamRepository
 import ar.com.composehexagonalarchitecture.application.port.out.UserRepository
 import ar.com.composehexagonalarchitecture.domain.Team
 import ar.com.composehexagonalarchitecture.domain.User
-import ar.com.composehexagonalarchitecture.application.port.out.TeamRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.zip
 import javax.inject.Inject
 
@@ -16,7 +17,7 @@ class GetUsersUseCase @Inject constructor(
     suspend fun invoke(): Flow<List<User>> {
          val teamsRange: IntRange = (1..30) //TODO: Sacar afuera en un repositorio externo,
 
-        val users: Flow<List<User>> = userRepository.getUsers()
+        val users: Flow<List<User>> = emptyFlow()
         val teams: Flow<List<Team>> = teamRepository.getTeams()
 
         val result: Flow<List<User>> =
