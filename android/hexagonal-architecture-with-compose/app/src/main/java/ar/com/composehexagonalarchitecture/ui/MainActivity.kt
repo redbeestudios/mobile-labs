@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
@@ -17,16 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.com.composehexagonalarchitecture.application.Application
 import ar.com.composehexagonalarchitecture.domain.User
-import ar.com.composehexagonalarchitecture.ui.components.Thumb
+import ar.com.composehexagonalarchitecture.ui.components.UserItem
 import ar.com.composehexagonalarchitecture.ui.theme.ComposeHexagonalArchitectureTheme
 import ar.com.composehexagonalarchitecture.ui.viewmodel.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -81,45 +77,6 @@ class MainActivity : ComponentActivity() {
                     )
                 }
             }
-    }
-
-    @Composable
-    fun UserItem(
-        user: User,
-        onClick: () -> Unit,
-        modifier: Modifier = Modifier
-    ) {
-        Card(
-            modifier = modifier.clickable { onClick() }
-                .padding(end = 16.dp),
-            elevation = 4.dp,
-            border = BorderStroke(color = Color.White, width = 4.dp)
-        ) {
-            Column(horizontalAlignment = CenterHorizontally,) {
-                Thumb(user = user)
-                Spacer(modifier = Modifier.height(8.dp))
-               // Title(user)
-                Text(
-                    text = user.fullName,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.h6,
-                    color = Color.Black,
-                    modifier = Modifier.padding(horizontal = 16.dp).align(CenterHorizontally),
-                    fontStyle = FontStyle.Italic
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = user.email,
-                    style = MaterialTheme.typography.body1,
-                    color = Color.Black,
-                    modifier = Modifier.padding(horizontal = 16.dp).align(CenterHorizontally)
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-            }
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-
     }
 
     @Composable

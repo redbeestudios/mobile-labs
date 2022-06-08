@@ -2,39 +2,45 @@ package ar.com.composehexagonalarchitecture.ui.components
 
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import ar.com.composehexagonalarchitecture.R
-import ar.com.composehexagonalarchitecture.domain.User
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
 @Composable
-fun Thumb(modifier: Modifier = Modifier,
-          user: User,
-          contentDescription: String = "") {
+fun Thumb(
+    modifier: Modifier = Modifier,
+    url: String,
+    size: Dp = 60.dp,
+    contentDescription: String = "",
+    placeholder: Painter? = null
+) {
     Box(
         modifier = modifier
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data(user.photos[0])
+                .data(url)
                 .crossfade(true)
                 .build(),
+            placeholder = placeholder,
             contentDescription = contentDescription,
             modifier = Modifier
                 .clip(CircleShape)
-                .fillMaxSize(1f),
+                .width(size)
+                .height(size),
             contentScale = ContentScale.Crop
         )
     }
@@ -43,20 +49,5 @@ fun Thumb(modifier: Modifier = Modifier,
 @Composable
 @Preview(showBackground = true)
 fun PreviewThumb() {
-    Box(
-        modifier = Modifier
-            .height(dimensionResource(R.dimen.cell_thumb_height))
-            .fillMaxWidth()
-    ) {
-        AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data("")
-                .crossfade(true)
-                .build(),
-            contentDescription = "",
-            modifier = Modifier
-                .clip(CircleShape)
-                .fillMaxSize(),
-            contentScale = ContentScale.Crop)
-    }
+    Thumb(url = "https://randomuser.me/api/portraits/men/10.jpg", placeholder = painterResource(id = R.drawable.ic_launcher_background))
 }
