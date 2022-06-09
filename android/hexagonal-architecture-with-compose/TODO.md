@@ -3,3 +3,5 @@
 - No nombrar service a los de retrofit, usar sufijo Endpoint
 - Iear interfaces y poner adapters como implementaciones
 - DDDearla
+- Ver lo innecesario del di
+- Usar gradle.kts
