@@ -1,0 +1,5 @@
+- Moshi
+- Users data.local con Room
+- No nombrar service a los de retrofit, usar sufijo Endpoint
+- Iear interfaces y poner adapters como implementaciones
+- DDDearla
