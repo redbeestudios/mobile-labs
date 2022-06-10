@@ -6,6 +6,7 @@ target 'Demo' do
   use_frameworks!
 
   # Pods for Demo
+  pod 'Swinject'
   pod 'Alamofire'
 
   target 'DemoTests' do

@@ -7,10 +7,15 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct UserList: View {
+    var users: U
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ScrollView {
+            LazyVStack {
+                ForEach()
+            }
+        }
     }
 }
 
