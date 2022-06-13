@@ -6,21 +6,49 @@
 //
 
 import SwiftUI
+import Combine
+import Alamofire
 
 struct UserList: View {
-    var users: U
+    @EnvironmentObject var userService: UserService
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                ForEach()
+        Presentation(
+            usersOrNil: userService.users,
+            errorOrNil: userService.error
+        )
+    }
+    
+    struct Presentation: View {
+        var usersOrNil: [User]?
+        var errorOrNil: Error?
+        
+        @ViewBuilder
+        var body: some View {
+            if let users = usersOrNil {
+                ScrollView {
+                    LazyVStack {
+                        ForEach(users, id: \.id) { user in
+                            Text(user.firstName)
+                        }
+                    }
+                }
+            } else if let error = errorOrNil {
+                Text(error.localizedDescription)
+            } else {
+                ProgressView()
             }
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct UserList_Previews: PreviewProvider {
+    static var repositoryMock = UserMockRepository()
+
     static var previews: some View {
-        ContentView()
+        UserList.Presentation(
+            usersOrNil: repositoryMock.users,
+            errorOrNil: ApplicationError.generic("Oops")
+        )
     }
 }

@@ -6,14 +6,13 @@
 //
 
 import Foundation
-import Combine
 
-class UserService {
+@MainActor class UserService : ObservableObject {
     private let userRepository: IUserRepository
 
-    private let usersSubject = CurrentValueSubject<[User]?, Error>(nil)
-    private let errorSubject = CurrentValueSubject<Error?, Error>(nil)
-    private let loadingSubject = CurrentValueSubject<Bool, Error>(false)
+    @Published var users: [User]? = nil
+    @Published var error: Error? = nil
+    @Published var loading: Bool = false
     
     init(userRepository: IUserRepository) {
         self.userRepository = userRepository
@@ -28,15 +27,15 @@ class UserService {
     }
     
     private func refresh() async {
-        loadingSubject.send(true)
+        loading = true
 
         switch await userRepository.getUsers() {
         case .success(let users):
-            self.usersSubject.send(users)
+            self.users = users
         case .failure(let error):
-            self.errorSubject.send(error)
+            self.error = error
         }
 
-        loadingSubject.send(false)
+        loading = false
     }
 }

@@ -9,15 +9,18 @@ import SwiftUI
 
 @main
 struct DemoApp: App {
-    let application = Application()
+    let application: Application
     
     init() {
+        application = Application()
         application.start()
     }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                UserList()
+            }.environmentObject(application.user)
         }
     }
 }

@@ -22,7 +22,9 @@
 		A93A7DC52852910200D6C945 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A93A7DC42852910200D6C945 /* Podfile */; };
 		A93A7DC7285291A000D6C945 /* UserNetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93A7DC6285291A000D6C945 /* UserNetworkRepository.swift */; };
 		A93A7DCA2852922500D6C945 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93A7DC92852922500D6C945 /* User.swift */; };
-		A93A7DCC2852937500D6C945 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93A7DCB2852937500D6C945 /* Team.swift */; };
+		A954EBAF2857F0FA0023E5EC /* ApplicationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A954EBAE2857F0FA0023E5EC /* ApplicationError.swift */; };
+		A9F14BE72857A55F0025647C /* UserMockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F14BE62857A55F0025647C /* UserMockRepository.swift */; };
+		A9F14BEF2857CF4D0025647C /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F14BEE2857CF4D0025647C /* NetworkConfiguration.swift */; };
 		CC76E20EEECB76E59DC6EF07 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88178456FCE3D8E1A39EB0CA /* Pods_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +67,9 @@
 		A93A7DC42852910200D6C945 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A93A7DC6285291A000D6C945 /* UserNetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkRepository.swift; sourceTree = "<group>"; };
 		A93A7DC92852922500D6C945 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		A93A7DCB2852937500D6C945 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		A954EBAE2857F0FA0023E5EC /* ApplicationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationError.swift; sourceTree = "<group>"; };
+		A9F14BE62857A55F0025647C /* UserMockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMockRepository.swift; sourceTree = "<group>"; };
+		A9F14BEE2857CF4D0025647C /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
 		B93CDEED7F453423153B41D2 /* Pods-Demo-DemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo-DemoUITests.release.xcconfig"; path = "Target Support Files/Pods-Demo-DemoUITests/Pods-Demo-DemoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BC9ACC01E991780A8928FA13 /* Pods_Demo_DemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo_DemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1E0F18713CBFAE58DDF0215 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 				A90F60252853A1CE00680D57 /* Data */,
 				A90F60222853A1AF00680D57 /* Service */,
 				A90F60202853971400680D57 /* Application.swift */,
+				A954EBAE2857F0FA0023E5EC /* ApplicationError.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 		A93A7DC228528EDC00D6C945 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				A9F14BE52857A5500025647C /* Mock */,
 				A93A7DC328528EE600D6C945 /* Network */,
 			);
 			path = Data;
@@ -231,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				A93A7DC6285291A000D6C945 /* UserNetworkRepository.swift */,
+				A9F14BEE2857CF4D0025647C /* NetworkConfiguration.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -239,9 +246,16 @@
 			isa = PBXGroup;
 			children = (
 				A93A7DC92852922500D6C945 /* User.swift */,
-				A93A7DCB2852937500D6C945 /* Team.swift */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		A9F14BE52857A5500025647C /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				A9F14BE62857A55F0025647C /* UserMockRepository.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -485,12 +499,14 @@
 			files = (
 				A90F60272853A1E700680D57 /* IUserRepository.swift in Sources */,
 				A90F60242853A1BA00680D57 /* UserService.swift in Sources */,
+				A9F14BE72857A55F0025647C /* UserMockRepository.swift in Sources */,
 				A90F60212853971400680D57 /* Application.swift in Sources */,
 				A93A7DCA2852922500D6C945 /* User.swift in Sources */,
+				A9F14BEF2857CF4D0025647C /* NetworkConfiguration.swift in Sources */,
 				A93A7D9B285256F900D6C945 /* UserList.swift in Sources */,
 				A93A7DC7285291A000D6C945 /* UserNetworkRepository.swift in Sources */,
-				A93A7DCC2852937500D6C945 /* Team.swift in Sources */,
 				A93A7D99285256F900D6C945 /* DemoApp.swift in Sources */,
+				A954EBAF2857F0FA0023E5EC /* ApplicationError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

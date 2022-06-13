@@ -8,12 +8,17 @@
 import Foundation
 import Swinject
 
-class Application {
+@MainActor class Application {
     let container = Container()
     let user: UserService
     
     init() {
-        container.register(IUserRepository.self) { _ in UserNetworkRepository() }
+        container.register(NetworkConfiguration.self) { _ in
+            NetworkConfiguration(baseUrl: "http://localhost:3000")
+        }
+        container.register(IUserRepository.self) { r in
+            UserNetworkRepository(networkConfiguration: r.resolve(NetworkConfiguration.self)!)
+        }
         container.register(UserService.self) { r in
             UserService(userRepository: r.resolve(IUserRepository.self)!)
         }
