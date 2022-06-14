@@ -7,15 +7,11 @@
 
 import Foundation
 
-class User: Decodable {
-    init(id: String, firstName: String) {
-        self.id = id
-        self.firstName = firstName
-    }
-    
+struct User {
     let id: String
     let firstName: String
-    var lastName: String? = nil
-    var email: String? = nil
-    var age: Int? = nil
+    let lastName: String?
+    let email: String?
+    let age: Int?
+    let image: NetworkImage?
 }

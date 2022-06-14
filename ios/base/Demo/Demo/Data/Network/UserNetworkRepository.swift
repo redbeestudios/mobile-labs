@@ -20,8 +20,9 @@ class UserNetworkRepository : IUserRepository {
     func getUsers() async -> Result<[User], Error> {
         return await AF
             .request(baseUrl, method: .get)
-            .serializingDecodable([User].self)
+            .serializingDecodable([UserNetworkModel].self)
             .result
+            .map { users in users.map { user in user.toDomain() }}
             .mapError { error in error as Error }
     }
 }

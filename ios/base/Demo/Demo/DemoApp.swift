@@ -18,9 +18,7 @@ struct DemoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                UserList()
-            }.environmentObject(application.user)
+            UserHome().environmentObject(application.user)
         }
     }
 }
