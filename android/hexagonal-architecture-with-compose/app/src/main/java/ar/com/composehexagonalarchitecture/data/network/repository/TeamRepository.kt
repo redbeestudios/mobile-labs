@@ -1,10 +1,10 @@
-package ar.com.composehexagonalarchitecture.data.network.adapter
+package ar.com.composehexagonalarchitecture.data.network.repository
 
 import android.util.Log
 import ar.com.composehexagonalarchitecture.data.network.mapper.TeamMapper
-import ar.com.composehexagonalarchitecture.data.network.service.TeamsService
+import ar.com.composehexagonalarchitecture.data.network.datasource.TeamsEndpoint
 import ar.com.composehexagonalarchitecture.domain.Team
-import ar.com.composehexagonalarchitecture.application.port.out.TeamRepository
+import ar.com.composehexagonalarchitecture.application.repository.ITeamRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -14,13 +14,13 @@ import kotlinx.coroutines.flow.flowOn
 import java.lang.Exception
 import javax.inject.Inject
 
-class TeamAdapter @Inject constructor(private val teamsService: TeamsService) : TeamRepository { //TODO: No se deberian llamar adapters.. en android es otra cosa
+class TeamRepository @Inject constructor(private val teamsEndpoint: TeamsEndpoint) : ITeamRepository {
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
     override suspend fun getTeams(): Flow<List<Team>> {
 
         return flow {
-                val teams = teamsService.getTeams().body()!!
+                val teams = teamsEndpoint.getTeams().body()!!
                     .data//TODO: Ver
                     .onEach { Log.d("response-teams", it.toString()) }
                     .map { teamRest -> TeamMapper.toDomain(teamRest)}
@@ -29,10 +29,5 @@ class TeamAdapter @Inject constructor(private val teamsService: TeamsService) : 
 
             }.catch { throw Exception(it.message) } //TODO: Manejar error
             .flowOn(dispatcher)
-/*
-        return flow<List<Team>> {
-            emit(listOf())
-        }.flowOn(dispatcher)*/
-
         }
 }

@@ -1,6 +1,6 @@
 package ar.com.composehexagonalarchitecture.application.service
 
-import ar.com.composehexagonalarchitecture.application.port.out.UserRepository
+import ar.com.composehexagonalarchitecture.application.repository.IUserRepository
 import ar.com.composehexagonalarchitecture.domain.User
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 @Singleton
 class UserService @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: IUserRepository
 ) {
     private var dispatcher: CoroutineDispatcher = Dispatchers.IO
 

@@ -1,7 +1,7 @@
-package ar.com.composehexagonalarchitecture.application.port.out
+package ar.com.composehexagonalarchitecture.application.repository
 
 import ar.com.composehexagonalarchitecture.domain.User
 
-interface UserRepository {
+interface IUserRepository {
     suspend fun getUsers(): List<User>
 }
