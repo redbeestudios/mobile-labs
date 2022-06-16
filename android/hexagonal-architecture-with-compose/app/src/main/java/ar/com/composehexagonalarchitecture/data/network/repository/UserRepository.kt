@@ -10,7 +10,7 @@ import javax.inject.Inject
 class UserRepository @Inject constructor(private val usersEndpoint: UsersEndpoint) :
     IUserRepository {
 
-    override suspend fun getUsers(): List<User> = usersEndpoint.getUsers(50).body()!!
+    override suspend fun getUsers(): List<User> = usersEndpoint.getUsers(50).body()!! //TODO: Manejo de error
         .results
         .onEach { Log.d("response-users", it.toString()) }
         .map { userRest -> UserMapper.toDomain(userRest) }

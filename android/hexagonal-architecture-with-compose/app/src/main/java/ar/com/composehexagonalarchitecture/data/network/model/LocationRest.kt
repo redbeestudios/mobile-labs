@@ -1,26 +1,29 @@
 package ar.com.composehexagonalarchitecture.data.network.model
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class LocationRest(
+    val street: StreetRest,
     val city: String,
-    val coordinates: CoordinatesRest,
+    val state: String,
     val country: String,
     val postcode: String,
-    val state: String,
-    val street: StreetRest,
+    val coordinates: CoordinatesRest,
     val timezone: TimezoneRest
 )
-
+@JsonClass(generateAdapter = true)
 data class CoordinatesRest(
     val latitude: String,
     val longitude: String
 )
-
+@JsonClass(generateAdapter = true)
 data class StreetRest(
-    val name: String,
-    val number: Int
+    val number: Int,
+    val name: String
 )
-
+@JsonClass(generateAdapter = true)
 data class TimezoneRest(
-    val description: String,
-    val offset: String
+    val offset: String,
+    val description: String
 )

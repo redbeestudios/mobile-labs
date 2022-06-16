@@ -11,7 +11,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -75,9 +75,9 @@ object DataModule {
     private fun buildRetrofit(url: String): Retrofit {
         return Retrofit.Builder()
             .baseUrl(url)
-            .addConverterFactory(GsonConverterFactory.create()) //TODO: MOSHI
+            .addConverterFactory(MoshiConverterFactory.create())
             .build()
-        //TODO: Ver de agregar un client e interceptor
+        //TODO: Add client or interceptor Okhttp
     }
 
 }
