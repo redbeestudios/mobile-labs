@@ -1,35 +1,41 @@
 package ar.com.composehexagonalarchitecture.data.network.model
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class UserResponseRest(
     val results: List<UserRest>
 )
 
+@JsonClass(generateAdapter = true)
 data class UserRest(
-    val cell: String,
-    val dob: DobRest,
-    val email: String,
     val gender: String,
-    val id: IdRest,
-    val location: LocationRest,
-    val login: LoginRest,
     val name: NameRest,
-    val nat: String,
+    val location: LocationRest,
+    val email: String,
+    val login: LoginRest,
+    val dob: DobRest,
+    val registered: RegisteredRest,
     val phone: String,
+    val cell: String,
+    val id: IdRest,
     val picture: PictureRest,
-    val registered: RegisteredRest
+    val nat: String
 )
 
+@JsonClass(generateAdapter = true)
 data class DobRest(
     val age: Int,
     val date: String
 )
 
+@JsonClass(generateAdapter = true)
 data class IdRest(
     val name: String,
-    val value: String
+    val value: String?
 )
 
-
+@JsonClass(generateAdapter = true)
 data class LoginRest(
     val md5: String,
     val password: String,
@@ -40,18 +46,21 @@ data class LoginRest(
     val uuid: String
 )
 
+@JsonClass(generateAdapter = true)
 data class NameRest(
     val first: String,
     val last: String,
     val title: String
 )
 
+@JsonClass(generateAdapter = true)
 data class PictureRest(
     val large: String,
     val medium: String,
     val thumbnail: String
 )
 
+@JsonClass(generateAdapter = true)
 data class RegisteredRest(
     val age: Int,
     val date: String

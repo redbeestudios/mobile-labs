@@ -50,6 +50,8 @@ android {
 
 def hilt_version = '2.38.1'
 def lifecycle_version = "2.5.0-rc01"
+def moshi_version = "1.13.0"
+def retrofit_version = "2.9.0"
 
 dependencies {
 
@@ -71,11 +73,12 @@ dependencies {
     kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
 
     //RETROFIT
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
-    //GSON
-    implementation 'com.google.code.gson:gson:2.9.0'
+    //MOSHI
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshi_version")
+    implementation "com.squareup.moshi:moshi:$moshi_version"
 
     //CORRUTINAS
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
