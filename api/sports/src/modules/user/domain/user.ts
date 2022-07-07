@@ -7,4 +7,5 @@ export interface User {
   email: string
   age: number
   image: Image
+  passowrd: string
 }
