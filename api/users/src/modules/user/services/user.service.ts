@@ -46,7 +46,7 @@ export class UserService {
     )
 
     if (!user) {
-      throw new BadRequestException()
+      throw new BadRequestException("Invalid Credentials")
     }
 
     const token = uuid()
