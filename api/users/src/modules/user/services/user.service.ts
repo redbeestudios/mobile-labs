@@ -7,6 +7,8 @@ import { AuthRequest } from '../domain/auth-request'
 
 const INITIAL_LENGTH = 5
 const IMAGE_SIZE = 200
+const GENDER_MALE = "MALE"
+const GENDER_FEMALE = "FEMALE"
 
 @Injectable()
 export class UserService {
@@ -15,12 +17,14 @@ export class UserService {
       id: i.toString(),
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
+      gender: (Number(faker.random.numeric())) > 5 ? GENDER_MALE : GENDER_FEMALE,
       email: faker.internet.email(),
-      age: Number(faker.random.numeric(2)),
+      phone: faker.phone.phoneNumber('501-###-###'),
+      birthdate: faker.date.birthdate().toDateString(),
       image: {
         url: faker.image.people(IMAGE_SIZE, IMAGE_SIZE),
       },
-      password: '123456',
+      password: '123456', //TODO: Ofuscated
     }),
   )
   private tokens = new Map<string, User>()
