@@ -14,7 +14,7 @@ export class AuthController { //TODO: Quizas es un dominio nuevo de Auth mas que
   }
 
   @Post('/register')
-  async register(@Body() user: User): Promise<void> {
+  async register(@Body() user: User): Promise<User> {
     return await this.userService.registerUser(user)
   }
 }

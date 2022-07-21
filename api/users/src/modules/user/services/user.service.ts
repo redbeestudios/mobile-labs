@@ -1,5 +1,10 @@
 import { faker } from '@faker-js/faker'
-import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common'
 import { User } from '../domain'
 import { v4 as uuid } from 'uuid'
 import { AuthResponse } from '../domain/auth-response'
@@ -7,8 +12,8 @@ import { AuthRequest } from '../domain/auth-request'
 
 const INITIAL_LENGTH = 5
 const IMAGE_SIZE = 200
-const GENDER_MALE = "MALE"
-const GENDER_FEMALE = "FEMALE"
+const GENDER_MALE = 'MALE'
+const GENDER_FEMALE = 'FEMALE'
 
 @Injectable()
 export class UserService {
@@ -17,7 +22,7 @@ export class UserService {
       id: i.toString(),
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
-      gender: (Number(faker.random.numeric())) > 5 ? GENDER_MALE : GENDER_FEMALE,
+      gender: Number(faker.random.numeric()) > 5 ? GENDER_MALE : GENDER_FEMALE,
       email: faker.internet.email(),
       phone: faker.phone.phoneNumber('501-###-###'),
       birthdate: faker.date.birthdate().toDateString(),
@@ -35,56 +40,58 @@ export class UserService {
 
   getUserById(id: string): Promise<User> {
     const user = this.users.find((u) => u.id === id)
-      if(!user) {
-        throw new NotFoundException()
-      }
-      return Promise.resolve(user)
+    if (!user) {
+      throw new NotFoundException()
+    }
+    return Promise.resolve(user)
   }
 
   async authenticateUser(
     authRequest: AuthRequest,
   ): Promise<AuthResponse | undefined> {
-    const {email, password} = authRequest
+    const { email, password } = authRequest
     const user = this.users.find(
       (u) => u.email === email && u.password === password,
     )
 
     if (!user) {
-      throw new BadRequestException("Invalid Credentials")
+      throw new BadRequestException('Invalid Credentials')
     }
 
     const token = uuid()
 
     this.tokens.set(token, user)
 
-    return {token: token, user: user}
+    return { token: token, user: user }
   }
 
   async validateToken(token: string): Promise<User | undefined> {
     const user = this.tokens.get(token)
-    if(!user) {
-      throw new UnauthorizedException()
+    if (!user) {
+      throw new UnauthorizedException('You are not authorized')
     }
     return user
   }
 
+  registerUser(user: User): Promise<User> {
+    if (this.existUser(user)) {
+      throw new BadRequestException('User already exists')
+    }
 
-  registerUser(user: User): void {
-      if(!this.isUserValid(user)) { //TODO: Deberia manejar dos dos excepciones independientes a futuro
-        throw new BadRequestException() 
-      }
-      this.users.push({...user, id: uuid()})
+    if (this.isSomeEmptyField(user)) {
+      throw new BadRequestException('Invalid data fields')
+    }
+
+    const createdUser: User = { ...user, id: uuid() }
+    this.users.push(createdUser)
+    return Promise.resolve(createdUser)
   }
 
-  private isUserValid(user: User): Boolean {
-    return this.notExistUser(user) && this.notEmptyFields(user)
+  private existUser(user: User): Boolean {
+    return this.users.find((u) => u.email === user.email) ? true : false
   }
 
-  private notExistUser(user: User): Boolean {
-    return this.users.find((u) => u.email === user.email)? false : true
-  }
-
-  private notEmptyFields(user: User): Boolean {
-    return user.email && user.password? true : false
+  private isSomeEmptyField(user: User): Boolean {
+    return !user.email || !user.password ? true : false
   }
 }
