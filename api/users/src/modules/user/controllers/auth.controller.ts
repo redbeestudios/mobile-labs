@@ -4,7 +4,7 @@ import { AuthRequest } from '../domain/auth-request'
 import { AuthResponse } from '../domain/auth-response'
 import { UserService } from '../services/user.service'
 
-@Controller('authentication')
+@Controller('api/v1/authentication')
 export class AuthController { //TODO: Quizas es un dominio nuevo de Auth mas que un controller nomas
   constructor(private readonly userService: UserService) {}
 

@@ -3,7 +3,7 @@ import { AuthGuard } from 'src/modules/shared/guard/auth.guard'
 import { User } from '../domain'
 import { UserService } from '../services/user.service'
 
-@Controller('users')
+@Controller('api/v1/users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
